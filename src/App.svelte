@@ -1,4 +1,5 @@
 <script>
+let flashclass=""
 let colour=null
 let logsBefore=0
 let logs=75
@@ -7,30 +8,21 @@ let lumberjacks=0
 function getLogs() {
   logs += 1
 }
-function setwhite() {
-  colour='white'
-  window.setTimeout(setred,200);
-}
-function setred() {
-  colour='red'
-  window.setTimeout(finishwhite,100);
-}
-function finishwhite() {
-  colour='white'
-}
 function lumberjack() {
   if(logs > 14) {
     lumberjacks += 1
     logs -= 15
   } else {
-    colour='red'
-        window.setTimeout(setwhite,100);
+    flashtwice()
   }
-
   }
 function calculateLogs() {
   logsBefore=logs
   logs = lumberjacks + logsBefore
+}
+function flashtwice() {
+  flashclass="flash"
+  setTimeout(() => {flashclass=""}, 750)
 }
 var a = setInterval(calculateLogs,3000);
 </script>
@@ -38,7 +30,7 @@ var a = setInterval(calculateLogs,3000);
 <main>
 <p style="height: 60px">
 </p>
-<button style="color: {colour}"on:click={lumberjack}>
+<button class="{flashclass}" style="color: {colour}"on:click={lumberjack}>
 Lumberjack: 15 logs<br/>
 1 log/3s
 ({lumberjacks} owned)
@@ -57,5 +49,10 @@ Planks {planks}
 </main>
 
 <style>
-
+.flash{animation: blinker 0.25s ease infinite;}
+@keyframes blinker{
+  50%{
+    color: red;
+  }
+}
 </style>
