@@ -5,6 +5,11 @@ let logsBefore=0
 let logs=75
 let planks=0
 let lumberjacks=0
+document.onkeypress=function(e){
+  if (e.keyCode === 108) {
+    getLogs()
+  }
+}
 function getLogs() {
   logs += 1
 }
@@ -38,7 +43,7 @@ Lumberjack: 15 logs<br/>
 <br/>
 <br/>
 <button on:click={getLogs}>
-Free Logs
+Free Logs (L)
 </button>
 <p style="height: 100px">
 </p>
